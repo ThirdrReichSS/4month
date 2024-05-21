@@ -8,7 +8,8 @@ urlpatterns = [
     path('hobbies/', hobbies_views, name='hobbies'),
     path('current_time/', current_time_views, name='time'),
     path('book/', book_view, name='book'),
-    path('book/<int:id>/', book_detail_view, name='book_detail'),
+    path('book/<int:id>/', book_detail_view, name='book'),
     path('book_list', views.book_list, name='book_list'),
     path('book_list/<int:id>/', views.book_detail, name='book_detail'),
+    path('create_book/', views.create_book_view, name='create'),
 ]

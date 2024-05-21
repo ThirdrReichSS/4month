@@ -2,7 +2,19 @@ import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Book
-from . import models
+from . import models, forms
+
+
+def create_book_view(request):
+    if request.method == 'POST':
+        form = forms.BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('<h3>Your book has been created</h3>')
+    else:
+        form = forms.BookForm()
+    return render(request, template_name='books/create_book.html',
+                  context={'form': form})
 
 
 def book_view(request):
@@ -44,3 +56,7 @@ def book_detail(request, id):
         book_id = get_object_or_404(models.Book, id=id)
         return render(request, template_name='books/book_detail.html',
                       context={'book_id': book_id})
+
+
+def create_book(request):
+   return None
